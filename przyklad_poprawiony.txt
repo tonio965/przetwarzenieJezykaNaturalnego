@@ -49,7 +49,7 @@ measurement
 matching
 stemmer
 result
-july
+julie
 los
 journal
 by
@@ -64,7 +64,7 @@ d
 languages
 may
 l
-many
+an
 great
 the
 subtle
@@ -97,7 +97,7 @@ influence
 features
 kent
 later
-his
+is
 earlier
 major
 late
@@ -117,7 +117,7 @@ need
 avoids
 tukey
 widely
-this
+the
 its
 iterative
 comparing
@@ -125,7 +125,7 @@ published
 strix
 paice
 remarkable
-tony
+to
 ending
 professor
 refers
@@ -145,10 +145,10 @@ their
 technique
 error
 around
-it
+not
 award
 paper
-and
+an
 provides
 of
 beth

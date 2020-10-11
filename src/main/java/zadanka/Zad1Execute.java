@@ -1,6 +1,7 @@
 package zadanka;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Zad1Execute {
 	
@@ -9,6 +10,21 @@ public class Zad1Execute {
 
 	public void execute() throws IOException {
 		// TODO Auto-generated method stub
+//		executePs2zad1();
+		executePs2zad2();
+		
+	}
+	
+	private void executePs2zad2() throws IOException {
+		ps2zad2 zad2 = new ps2zad2();
+		List<String> times = zad2.getWebsiteContent();
+		for(String time : times) {
+			System.out.println(time);
+		}
+		
+	}
+
+	private void executePs2zad1() throws IOException {
 		ps2zad1 s = new ps2zad1();
 		s.createDict();
 		s.do20percentChanges();
