@@ -10,8 +10,8 @@ public class Zad1Execute {
 
 	public void execute() throws IOException {
 		// TODO Auto-generated method stub
-//		executePs2zad1();
-		executePs2zad2();
+		executePs2zad1();
+//		executePs2zad2();
 		
 	}
 	

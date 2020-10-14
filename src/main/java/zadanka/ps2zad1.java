@@ -92,9 +92,12 @@ public class ps2zad1 {
 			
 			//generate how to change the word
 			selectedNumbers.add(selectedWord);
-			int selectedChange = generateRandomNumber(3);
 			String toChange = changedWords[selectedWord]; //word to change
-			switch(selectedChange) {
+			int howManyChanges = generateRandomNumber(3) + 1; //how many changes in the word
+			for(int x=0; x<howManyChanges; x++) {
+				
+				int selectedChange = generateRandomNumber(3); //which type of change to do
+				switch(selectedChange) {
 
 				case 0: //delete a radom letter
 					toChange=deleteAletter(toChange);
@@ -106,6 +109,8 @@ public class ps2zad1 {
 					toChange=changeAletter(toChange);
 					break;
 			
+				}
+				
 			}
 			changedWords[selectedWord]= toChange; //assign changed word to its place in the array
 			commitedChanges++;
@@ -249,14 +254,21 @@ public class ps2zad1 {
 
 	private String deleteAletter(String toChange) {
 		StringBuilder sb = new StringBuilder(toChange);
-		int indexToDelete = generateRandomNumber(toChange.length());
-		sb.deleteCharAt(indexToDelete);
+		System.out.println("len:"+toChange.length());
+		if(toChange.length()>0) {
+			int indexToDelete = generateRandomNumber(toChange.length());
+			sb.deleteCharAt(indexToDelete);
+		}
 		return sb.toString();
 	}
 
 
 	private int generateRandomNumber(int upperbound) {
-		Random rand = new Random();  
-	    return rand.nextInt(upperbound); 
+		Random rand = new Random();
+		int number = rand.nextInt(upperbound);
+		if(number<0)
+			number =number*(-1);
+//		System.out.println("returned number "+ number);
+	    return number;
 	}
 }
