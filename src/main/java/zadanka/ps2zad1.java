@@ -229,14 +229,16 @@ public class ps2zad1 {
 
 
 	private String changeAletter(String toChange) { //change a random letter in a string
-		String alphabet = "qwertyuiopasdfghjklzxcvbnm";
-		int letterToChange = generateRandomNumber(toChange.length());
-		int randomLetter = generateRandomNumber(26); //from alphabet
-		while(toChange.charAt(letterToChange)==alphabet.charAt(randomLetter)) { //to be sure it wont change to the same letter eg b to b
-			randomLetter = generateRandomNumber(26);
-		}
 		StringBuilder sb = new StringBuilder(toChange);
-		sb.setCharAt(letterToChange, alphabet.charAt(randomLetter));
+		if(toChange.length()>0) {
+			String alphabet = "qwertyuiopasdfghjklzxcvbnm";
+			int letterToChange = generateRandomNumber(toChange.length());
+			int randomLetter = generateRandomNumber(26); //from alphabet
+			while(toChange.charAt(letterToChange)==alphabet.charAt(randomLetter)) { //to be sure it wont change to the same letter eg b to b
+				randomLetter = generateRandomNumber(26);
+			}
+			sb.setCharAt(letterToChange, alphabet.charAt(randomLetter));
+		}
 		
 		return sb.toString();
 	}
@@ -244,10 +246,12 @@ public class ps2zad1 {
 
 	private String addAletter(String toChange) {
 		String alphabet = "qwertyuiopasdfghjklzxcvbnm";
-		int indexToAdd = generateRandomNumber(toChange.length());
-		int randomLetter = generateRandomNumber(26);
 		StringBuilder sb = new StringBuilder(toChange);
-		sb.insert(indexToAdd, alphabet.charAt(randomLetter));
+		if(toChange.length()>0) {
+			int indexToAdd = generateRandomNumber(toChange.length());
+			int randomLetter = generateRandomNumber(26);
+			sb.insert(indexToAdd, alphabet.charAt(randomLetter));
+		}
 		return sb.toString();
 	}
 
