@@ -34,8 +34,8 @@ public class SentenceCounter {
 	//zad1
 	public static void countSentences() throws FileNotFoundException {
 		System.out.println("Zad1");
-		InputStream modelIn = new FileInputStream("/Users/tomaszkoltun/eclipse-workspace/0.0.1/src/main/resources/en-sent.bin");
-		File f = new File("/Users/tomaszkoltun/eclipse-workspace/0.0.1/src/main/resources/zad5.txt");
+		InputStream modelIn = new FileInputStream("C:/Users/tonio/Documents/GitHub/przetwarzenieJezykaNaturalnego/src/main/resources/en-sent.bin");
+		File f = new File("C:/Users/tonio/Documents/GitHub/przetwarzenieJezykaNaturalnego/src/main/resources/zad5.txt");
 		StringBuilder sb = new StringBuilder();
 		try {
 			SentenceModel model = new SentenceModel(modelIn);
@@ -58,7 +58,7 @@ public class SentenceCounter {
 	
 	public static void countTokens() throws FileNotFoundException {
 		System.out.println("Zad2");
-		File f = new File("/Users/tomaszkoltun/eclipse-workspace/0.0.1/src/main/resources/zad5.txt");
+		File f = new File("C:/Users/tonio/Documents/GitHub/przetwarzenieJezykaNaturalnego/src/main/resources/zad5.txt");
 		StringBuilder sb = new StringBuilder();
 		try {
 			Scanner sc = new Scanner(f);
@@ -81,8 +81,8 @@ public class SentenceCounter {
 	//zad 3 
 	public static void meanAmountOfTokensInSentence() throws FileNotFoundException {
 		System.out.println("Zad3");
-		InputStream modelIn = new FileInputStream("/Users/tomaszkoltun/eclipse-workspace/0.0.1/src/main/resources/en-sent.bin");
-		File f = new File("/Users/tomaszkoltun/eclipse-workspace/0.0.1/src/main/resources/zad5.txt");
+		InputStream modelIn = new FileInputStream("C:/Users/tonio/Documents/GitHub/przetwarzenieJezykaNaturalnego/src/main/resources/en-sent.bin");
+		File f = new File("C:/Users/tonio/Documents/GitHub/przetwarzenieJezykaNaturalnego/src/main/resources/zad5.txt");
 		StringBuilder sb = new StringBuilder();
 		SimpleTokenizer tokenizer = new SimpleTokenizer();
 		try {
@@ -119,11 +119,11 @@ public class SentenceCounter {
 	public static void countPartsOfSpeech() throws IOException {
 		
 		System.out.println("zad4 and zad5");
-		InputStream modelIn = new FileInputStream("/Users/tomaszkoltun/eclipse-workspace/0.0.1/src/main/resources/en-pos-maxent.bin");
-		InputStream tokenmodelIn = new FileInputStream("/Users/tomaszkoltun/eclipse-workspace/0.0.1/src/main/resources/en-sent.bin");
+		InputStream modelIn = new FileInputStream("C:/Users/tonio/Documents/GitHub/przetwarzenieJezykaNaturalnego/src/main/resources/en-pos-maxent.bin");
+		InputStream tokenmodelIn = new FileInputStream("C:/Users/tonio/Documents/GitHub/przetwarzenieJezykaNaturalnego/src/main/resources/en-sent.bin");
 		POSModel model = new POSModel(modelIn);
 		POSTaggerME tagger = new POSTaggerME(model);
-		File f = new File("/Users/tomaszkoltun/eclipse-workspace/0.0.1/src/main/resources/zad5.txt");
+		File f = new File("C:/Users/tonio/Documents/GitHub/przetwarzenieJezykaNaturalnego/src/main/resources/zad5.txt");
 	    SimpleTokenizer tokenizer = new SimpleTokenizer();
 		Scanner sc = new Scanner(f);
 		
@@ -181,7 +181,7 @@ public class SentenceCounter {
 	    
 	    
 	    ///zad5 
-		InputStream is = new FileInputStream("/Users/tomaszkoltun/eclipse-workspace/0.0.1/src/main/resources/en-lemmatizer.dict");
+		InputStream is = new FileInputStream("C:/Users/tonio/Documents/GitHub/przetwarzenieJezykaNaturalnego/src/main/resources/en-lemmatizer.dict");
 		DictionaryLemmatizer lemmatizer = new DictionaryLemmatizer(is);
 		String [] nounsArray = new String[nouns.size()];
 		String [] tagsArray = new String[nouns.size()];
@@ -200,6 +200,46 @@ public class SentenceCounter {
 		System.out.println("the most occuring nouns");
 		for(int i=0; i<6; i++) {
 			System.out.println(items.get(items.size()-i-1).getValue()+" "+items.get(items.size()-i-1).getOccurences() );
+		}
+		
+		
+		//zad6
+		System.out.println("Zad6");
+		for(int i=0; i<3; i++) {
+			String noun = items.get(items.size()-i-1).getValue();
+		    String [] tokenedWords = tokenizer.tokenize(fromFile);
+		    String tagsoftokened[] = tagger.tag(tokenedWords); 
+		    List<String> adjsForNoun = new ArrayList<>();
+		    for(int j=0;j<tokenedWords.length; j++) {
+		    	//if word matches the noun like a string and if its a noun - check if previous tokens are adjs if so add to list
+		    	if(tokenedWords[j].contains(noun)) {
+		    		
+			    	if(tagsoftokened[j].equals("NN") || tagsoftokened[j].equals("NNS") || tagsoftokened[j].equals("NNP") || tagsoftokened[j].equals("NNPS")) {
+				    	
+			    		boolean isAdj=true;
+			    		int index=j-1;
+			    		while (isAdj) {
+			    			if(tagsoftokened[index].equals("JJ") || tagsoftokened[index].equals("JJR") || tagsoftokened[index].equals("JJS")) {
+			    				adjsForNoun.add(tokenedWords[index]);
+			    				index-=1;
+			    			}
+			    			else {
+			    				isAdj=false;
+			    			}
+
+			    		}
+
+			    	}
+		    		
+
+		    	}
+		    }
+		    StringBuilder adjs = new StringBuilder();
+		    for(String adj : adjsForNoun) {
+		    	adjs.append(adj).append(" ");
+		    }
+		    System.out.println("noun: "+noun);
+		    System.out.println("adjectives to it: "+adjs.toString());
 		}
 	}
 	
